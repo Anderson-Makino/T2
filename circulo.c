@@ -4,23 +4,14 @@
 
 #include "circulo.h"
 
-typedef struct circulo{
-    int i;       /*indentificador*/
-    float x,y;   /*coordenadas*/
-    int r;      /*raio do circulo*/
-    char *cor1,*cor2;    /*cor da borda e do preenchimento*/
-}circulo;
-
-void indentifica (char *ch,char *info,int ncirc)
+void indentificacirculo (char *ch,char *info,int ncirc,circulo *circ)
 {
-    circulo *circ;
     info=strtok(ch," ");
     circ[ncirc].i=atoi(info);
 }
 
-void pegacor(char *ch,char *info,int ncirc)
+void pegacorcirculo(char *ch,char *info,int ncirc,circulo *circ)
 {
-    circulo *circ;
     info=strtok(ch," ");
     circ[ncirc].cor1=(char *) malloc((strlen(info)+1)*sizeof(char));
     strcpy(circ[ncirc].cor1,info);
@@ -30,47 +21,43 @@ void pegacor(char *ch,char *info,int ncirc)
 }
 
 
-void pegaraio(char *ch,char *info,int ncirc)
+void pegaraio(char *ch,char *info,int ncirc,circulo *circ)
 {
-    circulo *circ;
     info=strtok(ch," ");
     circ[ncirc].r=atoi(info);
 }
 
-void pegacoordenadas(char *ch,char *info,int ncirc)
+void pegacoordenadascirculo(char *ch,char *info,int ncirc,circulo *circ)
 {
-    circulo *circ;
     info=strtok(ch," ");
     circ[ncirc].x=atof(info);
     info=strtok(ch," ");
     circ[ncirc].y=atof(info);
 }
 
-int devolveidcirculo(int j)
+int devolveidcirculo(int j,circulo *circ)
 {
-    circulo *circ;
     return (circ[j].i);
 }
 
-float devolvexcirculo(int j)
+float devolvexcirculo(int j,circulo *circ)
 {
-    circulo *circ;
     return (circ[j].x);
 }
 
-float devolveycirculo(int j)
+float devolveycirculo(int j,circulo *circ)
 {
-    circulo *circ;
     return (circ[j].y);
 }
 
-void criacirculo (char *ch,int ncirc)
+circulo *criacirculo (char *ch,int ncirc)
 {
     circulo *circ;
     char *info;
-    circ=(circulo *) malloc((ncirc+1) * sizeof(circulo));
-    indentifica(ch,info,ncirc);
-    pegacor(ch,info,ncirc);
-    pegaraio(ch,info,ncirc);
-    pegacoordenadas(ch,info,ncirc);
+    circ=malloc((ncirc+1) * sizeof(circulo));
+    indentificacirculo(ch,info,ncirc,circ);
+    pegacorcirculo(ch,info,ncirc,circ);
+    pegaraio(ch,info,ncirc,circ);
+    pegacoordenadascirculo(ch,info,ncirc,circ);
+    return (circ);
 }

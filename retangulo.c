@@ -4,79 +4,62 @@
 
 #include "retangulo.h"
 
-typedef struct retangulo{
-    int i;
-    float x,y;    /*coordenadas*/
-    int w,h;      /*largura e altura do retangulo*/
-    char *cor1,*cor2;    /*cor da borda e do preenchimento*/
-}retangulo;
-
-void indentifica (char *info)
+void indentificaretangulo (char *ch,char *info,int nret,retangulo *ret)
 {
-    int j;
-    ret->i[j]=atoi(info);
+    info=strtok(ch," ");
+    ret[nret].i=atoi(info);
 }
 
-void pegacor(char *ch,char *info)
+void pegacorretangulo(char *ch,char *info,int nret,retangulo *ret)
 {
-    int i;
-    info=strtok(ch,' ');
-    info=strtok(ch,"");
-    ret->cor1=(char *) malloc((strlen(info)+1)*sizeof(char));
-    for(i=0;i<strlen(info);i++)
-    {
-    ret->cor1[i]=info[i];
-    }
-    info=strtok(ch,' ');
-    info=strtok(ch,"");
-    ret->cor2=(char *) malloc((strlen(info)+1)*sizeof(char));
-    for(i=0;i<strlen(info);i++)
-    {
-    ret->cor2[i]=info[i];
-    }
+    info=strtok(ch," ");
+    ret[nret].cor1=(char *) malloc((strlen(info)+1)*sizeof(char));
+    strcpy(ret[nret].cor1,info);
+    info=strtok(ch," ");
+    ret[nret].cor2=(char *) malloc((strlen(info)+1)*sizeof(char));
+    strcpy(ret[nret].cor2,info);
 }
 
 
-void pegadimensao(char *ch,char *info)
+void pegadimensao(char *ch,char *info,int nret,retangulo *ret)
 {
-    info=strtok(ch,' ');
-    ret->w=atoi(info);
-    info=strtok(ch,' ');
-    ret->h=atoi(info);
+    info=strtok(ch," ");
+    ret[nret].w=atof(info);
+    info=strtok(ch," ");
+    ret[nret].h=atof(info);
 }
 
-void pegacoordenadas(char *ch,char *info)
+void pegacoordenadasretangulo(char *ch,char *info,int nret,retangulo *ret)
 {
-    info=strtok(ch,' ');
-    ret->x=atof(info);
-    info=strtok(ch,' ');
-    ret->y=atof(info);
+    info=strtok(ch," ");
+    ret[nret].x=atof(info);
+    info=strtok(ch," ");
+    ret[nret].y=atof(info);
 }
 
-int devolveidretangulo(int j)
+int devolveidretangulo(int j,retangulo *ret)
 {
-    return (ret[j]->i);
+    return (ret[j].i);
 }
 
-float devolvexretangulo(int j)
+float devolvexretangulo(int j,retangulo *ret)
 {
-    return(ret[j]->x);
+    return(ret[j].x);
 }
 
-float devolveyretangulo(int j)
+float devolveyretangulo(int j,retangulo *ret)
 {
-    return(ret[j]->y);
+    return(ret[j].y);
 }
 
-void criaretangulo (char *ch,int nret)
+retangulo *criaretangulo (char *ch,int nret)
 {
+    char *info;
     retangulo *ret;
     ret=(retangulo *) malloc((nret+1)*sizeof(retangulo));
-    char *info;
-    char espaco[2]=" ";
-    info=strtok(ch,espaco);
-    indentifica(info);
-    pegacor(ch,info);
-    pegadimensao(ch,info);
-    pegacoordenadas(ch,info);
+    indentificaretangulo(ch,info,nret,ret);
+    pegacorretangulo(ch,info,nret,ret);
+    pegadimensao(ch,info,nret,ret);
+    pegacoordenadasretangulo(ch,info,nret,ret);
+    return (ret);
 }

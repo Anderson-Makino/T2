@@ -16,8 +16,9 @@ void comandos(FILE *e)
     char *nomebase;
     int ndefault=1000;
     int ncirc=0,nret=0;
+    circulo *circ;
+    retangulo *ret;
     nomearq=(char *) malloc(sizeof(char));
-    comando=(char *) malloc(sizeof(char));
 	while (fgets(linha,1000,e)!=NULL)
 	{
 	ch=strtok(linha,espaco);
@@ -30,33 +31,33 @@ void comandos(FILE *e)
     else if (comando[0]=='c')
     {
         ch=strtok(linha,"\n");
-        criacirculo (ch,ncirc);
+        circ=criacirculo (ch,ncirc);
         ncirc++;
     }
     
     else if (comando[0]=='r')
     {
         ch=strtok(linha,"\n");
-        criaretangulo (ch,nret);
+        ret=criaretangulo (ch,nret);
         nret++;
     }
     
     else if (comando[0]=='o')
     {
         ch=strtok(linha,"\n");
-        sobreposicao (ch,ncirc,nret);
+        sobreposicao (ch,ncirc,nret,circ,ret);
     }
     
     else if (comando[0]=='i')
     {
         ch=strtok(linha,"\n");
-        pontointerno (ch,ncirc,nret);
+        pontointerno (ch,ncirc,nret,circ,ret);
     }
     
     else if (comando[0]=='d')
     {
         ch=strtok(linha,"\n");
-        distancia (ch);
+        distancia (ch,ncirc,nret,circ,ret);
     }
     
     else if (comando[0]=='a')

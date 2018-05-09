@@ -1,20 +1,27 @@
 #ifndef RETANGULO_H
 #define RETANGULO_H
 
-void indentifica (char *info);
+typedef struct retangulo{
+    int i;
+    float x,y;    /*coordenadas*/
+    float w,h;      /*largura e altura do retangulo*/
+    char *cor1,*cor2;    /*cor da borda e do preenchimento*/
+}retangulo;
 
-void pegacor(char *ch,char *info);
+void indentificaretangulo (char *ch,char *info,int nret,retangulo *ret);
 
-void pegadimensao(char *ch,char *info);
+void pegacorretangulo(char *ch,char *info,int nret,retangulo *ret);
 
-void pegacoordenadas(char *ch,char *info);
+void pegadimensao(char *ch,char *info,int nret,retangulo *ret);
 
-int devolveidretangulo(int j);
+void pegacoordenadasretangulo(char *ch,char *info,int nret,retangulo *ret);
 
-float devolvexretangulo(int j);
+int devolveidretangulo(int j,retangulo *ret);
 
-float devolveyretangulo(int j);
+float devolvexretangulo(int j,retangulo *ret);
 
-void criaretangulo (char *ch,int nret);
+float devolveyretangulo(int j,retangulo *ret);
+
+retangulo *criaretangulo (char *ch,int nret);
 
 #endif
