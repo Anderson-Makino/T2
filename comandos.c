@@ -8,18 +8,34 @@
 #include "circulo.h"
 #include "arquivo.h"
 
-void comandos(FILE *e)
+void comandos(FILE *e,char *diretorio,char *nomebase)
 {
+    FILE *sig;
     char *comando,espaco[2]=" ";
-    char linha[2000],*ch;
+    char *linha,*ch;
+    char cha;
     char *nomearq;
-    char *nomebase;
+    char *dio;
+    char *svg;
     int ndefault=1000;
     int ncirc=0,nret=0;
+    int sizefile;
     circulo *circ;
     retangulo *ret;
+    dio=malloc(sizeof(0));
+    svg=malloc(sizeof(0));
     nomearq=(char *) malloc(sizeof(char));
-	while (fgets(linha,1000,e)!=NULL)
+    while (1)
+	{
+		cha=fgetc(e);
+        if (cha==EOF)
+		{
+            break;
+		}
+        sizefile++;
+	}
+    linha=malloc(sizeof(char)*sizefile);
+	while (fgets(linha,sizefile,e)!=NULL)
 	{
 	ch=strtok(linha,espaco);
     comando=(char *) malloc(2*sizeof(char));
@@ -32,38 +48,40 @@ void comandos(FILE *e)
     {
         ch=strtok(linha,"\n");
         circ=criacirculo (ch,ncirc);
+        escrevesvgcirc(sig,ncirc,circ);
         ncirc++;
     }
     
     else if (comando[0]=='r')
     {
         ch=strtok(linha,"\n");
-        ret=criaretangulo (ch,nret);
+        ret=criaretangulo (ch,nret,svg);
+        escrevesvgquad (sig,nret,ret);
         nret++;
     }
     
     else if (comando[0]=='o')
     {
         ch=strtok(linha,"\n");
-        sobreposicao (ch,ncirc,nret,circ,ret);
+        sobreposicao (ch,ncirc,nret,circ,ret,dio);
     }
     
     else if (comando[0]=='i')
     {
         ch=strtok(linha,"\n");
-        pontointerno (ch,ncirc,nret,circ,ret);
+        pontointerno (ch,ncirc,nret,circ,ret,dio);
     }
     
     else if (comando[0]=='d')
     {
         ch=strtok(linha,"\n");
-        distancia (ch,ncirc,nret,circ,ret);
+        distancia (ch,ncirc,nret,circ,ret,dio);
     }
     
     else if (comando[0]=='a')
     {
         ch=strtok(linha,"\n");
-        *nomearq=criaarq (nomebase,ch,nomearq);
+        *nomearq=criaarq (diretorio,nomebase,ch,nomearq);
     }
     
     else if (comando[0]=='#')

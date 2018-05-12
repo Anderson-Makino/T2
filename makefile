@@ -1,5 +1,5 @@
-siguel: args.o arquivo.o circulo.o comandos.o funcoes.o learq.o retangulo.o main.o
-	gcc args.o arquivo.o circulo.o comandos.o funcoes.o learq.o retangulo.o main.o -o siguel -lm -pedantic -ansi -g
+siguel: args.o arquivo.o circulo.o comandos.o concatena.o funcoes.o learq.o retangulo.o main.o
+	gcc args.o arquivo.o circulo.o comandos.o concatena.o funcoes.o learq.o retangulo.o main.o -o siguel -lm -pedantic -ansi -g
 
 args.o: args.c args.h
 		gcc -c args.c -o args.o -lm -Wall -pedantic -ansi -g
@@ -12,6 +12,9 @@ circulo.o: circulo.c circulo.h
 		
 comandos.o: comandos.c comandos.h
 	gcc -c comandos.c -o comandos.o -lm -Wall -pedantic -ansi -g
+
+concatena.o: concatena.c concatena.h
+	gcc -c concatena.c -o concatena.o -lm -Wall -pedantic -ansi -g
 	
 funcoes.o: funcoes.c funcoes.h
 		gcc -c funcoes.c -o funcoes.o -lm -Wall -pedantic -ansi -g

@@ -4,43 +4,58 @@
 
 #include "args.h"
 
-char arqentrada (char *entrada,int i,char *argv[])
+char *arqentrada (char *entrada,int i,char *argv[])
 {
 	int j;
-	entrada=(char *) malloc(strlen((*argv[i])+1)*sizeof(char));
-	for (j=0;j<strlen(*argv[i]);j++)
+	entrada=(char *) malloc(strlen((argv[i])+1)*sizeof(char));
+	for (j=0;j<strlen(argv[i]);j++)
 	{
 		entrada[j]=argv[i] [j];
 	}
+	entrada[j]='\0';
 	return(entrada);
 }
 
-char arqsaida (char *saida,int i,char *argv[])
+char *arqsaida (char *diretorio,int i,char *argv[])
 {
 	int j;
-	saida=(char *) malloc(strlen(*argv[i]+1)*sizeof(char));
-	for (j=0;j<strlen(*argv[i]);j++)
+	diretorio=(char *) malloc(strlen(argv[i]+1)*sizeof(char));
+	for (j=0;j<strlen(argv[i]);j++)
 	{
-		saida[j]=argv[i] [j];
+		diretorio[j]=argv[i] [j];
 	}
-	return(saida);
+	diretorio[j]='\0';
+	return(diretorio);
 }
 
-void verific(char *entrada,char *saida,int argc,char *argv[])
+char *verificf(char *entrada,int argc,char *argv[])
 {
 	int i;
 	for (i=1;i<argc;i++)
 	{
-	if (argv[i][0]=='-')
+	if (argv[i] [0]=='-')
 	{
-		if (argv[i][1]!='f')
+		if (argv[i][1]=='f')
 		{
 			entrada=arqentrada(entrada,i+1,argv);
 		}
-		else if(argv[i] [1]=='o')
+	}
+	}
+	return (entrada);
+}
+
+char *verifico(char *diretorio,int argc,char *argv[])
+{
+	int i;
+	for (i=1;i<argc;i++)
+	{
+	if (argv[i] [0]=='-')
+	{
+		if(argv[i] [1]=='o')
 		{
-			saida=arqsaida(saida,i+1,argv);
+			diretorio=arqsaida(diretorio,i+1,argv);
 		}
 	}
 	}
+	return (diretorio);
 }

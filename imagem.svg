@@ -1,5 +1,5 @@
 <svg>   
-  <circle cx="240" cy="90" r="50"  stroke-width="5" stroke="gold" fill="tomato"/>
+  <circle cx=240 cy=90 r=50  stroke-width=3 stroke=gold fill="tomato"/>
 
-<rect x="-40" y="-90" width="120" height="110" style="fill:rgb(0,0,255);stroke-width:5"/></rect>
+<rect x=90 y=50 width=120 height=110 stroke=blue fill="tomato"/></rect>
 </svg>

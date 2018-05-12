@@ -4,9 +4,12 @@
 #include "learq.h"
 #include "args.h"
 
-void main (int argc,char *argv[])
+int main (int argc,char *argv[])
 {
-    char *entrada,*saida;
-    verific(entrada,saida,argc,argv);
-    learq(entrada,saida);
+    char *entrada,*diretorio;
+    entrada=verificf(entrada,argc,argv);
+    diretorio=verifico(diretorio,argc,argv);
+    learq(entrada,diretorio);
+
+    return 0;
 }
